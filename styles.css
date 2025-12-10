@@ -187,22 +187,23 @@ a:hover{color:var(--green);}
 }
 
 .brand-tile {
-  background: #111111;
+  background: #0B3D2E; /* Deep Wimbledon Green */
   border-radius: 12px;
   padding: 2.25rem 1.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 120px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
 }
 
+
 .brand-tile img {
-  max-width: 120px;
-  max-height: 50px;
+  max-width: 130px;
+  max-height: 52px;
   object-fit: contain;
   display: block;
-  /* Make all logos monochrome light on dark */
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1); /* white on dark */
   opacity: 0.9;
   transition:
     opacity 0.18s ease,
@@ -212,6 +213,35 @@ a:hover{color:var(--green);}
 .brand-tile:hover img {
   opacity: 1;
   transform: scale(1.05);
+}
+
+/* Per-logo tweaks to compensate for SVG artboard differences */
+
+/* Barclays SVG has a very large viewBox, so we gently scale it up */
+.brand-tile--barclays img {
+  transform: scale(1.45);
+}
+
+/* Keep the hover scaling additive for Barclays */
+.brand-tile--barclays:hover img {
+  transform: scale(1.55);
+}
+
+/* McDonald's arches look a bit small; bump them up slightly */
+.brand-tile--mcdonalds img {
+  transform: scale(1.25);
+}
+
+.brand-tile--mcdonalds:hover img {
+  transform: scale(1.35);
+}
+
+/* Lidl's logo is a very square mark; 
+   make it a touch larger and soften the edges so it feels less “blocky” */
+.brand-tile--lidl img {
+  max-width: 90px;
+  max-height: 70px;
+  border-radius: 6px;
 }
 
 /* Slightly tighter layout on small screens */

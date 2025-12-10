@@ -228,13 +228,16 @@ a:hover{color:var(--green);}
 
 /* Text-only brand tile (for Lidl) */
 .brand-tile__text {
-  font-family: var(--font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif);
+  font-family: 'Goldman', var(--font-sans, sans-serif);
   font-weight: 700;
-  font-size: 1.5rem;
-  letter-spacing: 0.08em;
+  font-size: 1.8rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #FFFFFF;
+  color: #FFFFFF; /* Force white */
+  text-align: center;
+  display: block;
 }
+
 
 .brand-tile--lidl {
   /* no extra rules needed, but keeps the hook if we want to tweak spacing later */

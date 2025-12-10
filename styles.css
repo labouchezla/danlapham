@@ -219,7 +219,7 @@ a:hover{color:var(--green);}
 
 /* Barclays SVG has a very large viewBox, so we gently scale it up */
 .brand-tile--barclays img {
-  transform: scale(1.45);
+  transform: scale(1.05);
 }
 
 /* Keep the hover scaling additive for Barclays */

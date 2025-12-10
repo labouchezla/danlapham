@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+Sitemap: https://labouchezla.github.io/danlapham/sitemap.xml

@@ -60,6 +60,30 @@ a:hover{color:var(--green);}
 }
 .subhead{color:var(--purple); font-weight:600;}
 .lede{color:#333; max-width:60ch;}
+/* Brand logo section */
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 2rem 1.5rem;
+  align-items: center;
+  justify-items: center;
+  margin-top: 2rem;
+  padding: 1rem 0;
+}
+
+.brand img {
+  max-width: 120px; 
+  max-height: 50px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.brand img:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+}
 
 /* ===== Layout ===== */
 .section{

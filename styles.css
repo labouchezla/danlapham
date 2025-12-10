@@ -226,13 +226,20 @@ a:hover{color:var(--green);}
   transform: scale(1.35);
 }
 
-/* Lidl's logo is a very square mark; 
-   make it a touch larger and soften the edges so it feels less “blocky” */
-.brand-tile--lidl img {
-  max-width: 90px;
-  max-height: 70px;
-  border-radius: 6px;
+/* Text-only brand tile (for Lidl) */
+.brand-tile__text {
+  font-family: var(--font-sans, system-ui, -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #FFFFFF;
 }
+
+.brand-tile--lidl {
+  /* no extra rules needed, but keeps the hook if we want to tweak spacing later */
+}
+
 
 /* Slightly tighter layout on small screens */
 @media (max-width: 640px) {

@@ -178,18 +178,17 @@ a:hover{color:var(--green);}
   }
   .nav__list.is-open{display:flex;}
 }
-/* Brand wall (Profound-style) */
-
+/* Brand wall (Profound-style logo grid) */
 .brand-wall {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 2rem;
+  gap: 1.75rem;
   margin-top: 2.5rem;
 }
 
 .brand-tile {
-  background: #111;   /* dark tile */
-  border-radius: 8px;
+  background: #111111;
+  border-radius: 12px;
   padding: 2.25rem 1.75rem;
   display: flex;
   align-items: center;
@@ -200,15 +199,34 @@ a:hover{color:var(--green);}
 .brand-tile img {
   max-width: 120px;
   max-height: 50px;
-  filter: brightness(0) invert(1); /* makes all logos white */
+  object-fit: contain;
+  display: block;
+  /* Make all logos monochrome light on dark */
+  filter: brightness(0) invert(1);
   opacity: 0.9;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
 }
 
 .brand-tile:hover img {
   opacity: 1;
   transform: scale(1.05);
 }
+
+/* Slightly tighter layout on small screens */
+@media (max-width: 640px) {
+  .brand-tile {
+    padding: 1.75rem 1.25rem;
+    height: 100px;
+  }
+
+  .brand-tile img {
+    max-width: 100px;
+    max-height: 40px;
+  }
+}
+
 
 /* ===== Buttons ===== */
 .btn{

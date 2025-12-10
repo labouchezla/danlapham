@@ -217,16 +217,6 @@ a:hover{color:var(--green);}
 
 /* Per-logo tweaks to compensate for SVG artboard differences */
 
-/* Barclays SVG has a very large viewBox, so we gently scale it up */
-.brand-tile--barclays img {
-  transform: scale(1.05);
-}
-
-/* Keep the hover scaling additive for Barclays */
-.brand-tile--barclays:hover img {
-  transform: scale(1.55);
-}
-
 /* McDonald's arches look a bit small; bump them up slightly */
 .brand-tile--mcdonalds img {
   transform: scale(1.25);

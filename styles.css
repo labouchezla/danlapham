@@ -178,6 +178,37 @@ a:hover{color:var(--green);}
   }
   .nav__list.is-open{display:flex;}
 }
+/* Brand wall (Profound-style) */
+
+.brand-wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  margin-top: 2.5rem;
+}
+
+.brand-tile {
+  background: #111;   /* dark tile */
+  border-radius: 8px;
+  padding: 2.25rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+}
+
+.brand-tile img {
+  max-width: 120px;
+  max-height: 50px;
+  filter: brightness(0) invert(1); /* makes all logos white */
+  opacity: 0.9;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.brand-tile:hover img {
+  opacity: 1;
+  transform: scale(1.05);
+}
 
 /* ===== Buttons ===== */
 .btn{

@@ -1,5 +1,6 @@
-/* ====== Wimbledon-Inspired Design Tokens ====== */
+/* ===== Wimbledon-Inspired Design Tokens ====== */
 :root{
+  /* Colours */
   --green:#1B3D2F;       /* Wimbledon deep green */
   --purple:#4B306A;      /* Royal purple */
   --lav:#C6B8D6;         /* Lavender accent */
@@ -7,30 +8,35 @@
   --bg:#F7F6F3;          /* Cream background */
   --mid:#D8D6D2;         /* Soft mid-grey */
   --ink:#141414;         /* On-cream text colour */
+  --tile:#0B3D2E;        /* Deep tile green (brand wall) */
 
+  /* Layout */
   --max:1080px;
   --space:clamp(1rem, 2.5vw, 1.5rem);
   --radius:12px;
   --shadow:0 8px 28px rgba(0,0,0,.12);
+
+  /* Typography */
+  --serif:"Cormorant Garamond", Georgia, serif;
+  --sans:Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 }
 
 /* ===== Base ===== */
 *{box-sizing:border-box;}
 html,body{margin:0; padding:0;}
 body{
-  font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  font-family:var(--sans);
   background:var(--bg);
   color:var(--ink);
-  line-height:1.65;
+  line-height:1.7;
+  font-weight:300;
 }
 img{max-width:100%; display:block;}
 a{color:var(--purple); text-underline-offset:2px;}
 a:hover{color:var(--green);}
 .text-link{border-bottom:1px solid currentColor;}
 :focus-visible{outline:3px solid var(--purple); outline-offset:2px;}
-.skip-link{
-  position:absolute; left:-999px;
-}
+.skip-link{position:absolute; left:-999px;}
 .skip-link:focus{
   left:1rem; top:1rem;
   background:#000; color:#fff;
@@ -38,65 +44,62 @@ a:hover{color:var(--green);}
 }
 
 /* ===== Typography ===== */
-.h1,.h2,.h3,.nav__brand{
-  font-family:"Barlow Condensed", Inter, sans-serif;
-  letter-spacing:.5px;
+.h1,.h2,.h3{
+  font-family:var(--serif);
+  letter-spacing:.4px;
+  color:var(--green);
 }
 .h1{
-  font-weight:700;
-  font-size:clamp(2.4rem, 5vw, 3.25rem);
-  color:var(--green);
+  font-weight:600;
+  font-size:clamp(2.7rem, 5vw, 3.6rem);
   margin:0 0 .75rem;
 }
 .h2{
-  font-weight:700;
-  font-size:clamp(1.75rem, 3.2vw, 2.25rem);
+  font-weight:500;
+  font-size:clamp(1.9rem, 3.2vw, 2.35rem);
   margin:0 0 .75rem;
 }
+.h2::after{
+  content:"";
+  display:block;
+  width:40px;
+  height:2px;
+  background:var(--gold);
+  margin-top:.75rem;
+}
 .h3{
-  font-weight:600;
+  font-weight:500;
   font-size:1.25rem;
   margin:0 0 .5rem;
 }
-.subhead{color:var(--purple); font-weight:600;}
-.lede{color:#333; max-width:60ch;}
-/* Brand logo section */
-.brand-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 2rem 1.5rem;
-  align-items: center;
-  justify-items: center;
-  margin-top: 2rem;
-  padding: 1rem 0;
+
+.subhead{
+  font-family:var(--serif);
+  color:var(--purple);
+  font-weight:500;
+  font-size:1.25rem;
+}
+.lede{
+  color:#2b2b2b;
+  max-width:60ch;
+  font-weight:300;
 }
 
-.brand img {
-  max-width: 120px; 
-  max-height: 50px;
-  object-fit: contain;
-  filter: grayscale(100%);
-  opacity: 0.85;
-  transition: opacity 0.2s ease;
-}
-
-.brand img:hover {
-  opacity: 1;
-  filter: grayscale(0%);
-}
+/* Keep paragraphs readable and calm */
+p,li{max-width:65ch;}
 
 /* ===== Layout ===== */
 .section{
   max-width:var(--max);
   margin:0 auto;
-  padding:clamp(1.5rem,4vw,3rem) var(--space);
+  padding:clamp(2rem,5vw,4.75rem) var(--space);
 }
 .hero{
   max-width:var(--max);
   margin:0 auto;
-  padding:clamp(2rem,6vw,6rem) var(--space);
+  padding:clamp(2.5rem,7vw,6.5rem) var(--space);
   display:grid;
-  gap:1.5rem;
+  gap:1.25rem;
 }
 .cta-row{display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1rem;}
 
@@ -144,8 +147,12 @@ a:hover{color:var(--green);}
   gap:1rem;
 }
 .nav__brand{
-  font-weight:700; font-size:1.5rem;
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:1.6rem;
+  letter-spacing:.6px;
   color:var(--green);
+  text-decoration:none;
 }
 .nav__list{
   display:flex; gap:1rem; list-style:none;
@@ -178,96 +185,76 @@ a:hover{color:var(--green);}
   }
   .nav__list.is-open{display:flex;}
 }
-/* Brand wall (Profound-style logo grid) */
-.brand-wall {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.75rem;
-  margin-top: 2.5rem;
+
+/* ===== Brand wall (Profound-style logo grid) ===== */
+.brand-wall{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(180px, 1fr));
+  gap:1.75rem;
+  margin-top:2.25rem;
 }
-
-.brand-tile {
-  background: #0B3D2E; /* Deep Wimbledon Green */
-  border-radius: 12px;
-  padding: 2.25rem 1.75rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 120px;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+.brand-tile{
+  background:var(--tile);
+  border-radius:14px;
+  padding:2.25rem 1.75rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:120px;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,0.08);
 }
-
-
-.brand-tile img {
-  max-width: 130px;
-  max-height: 52px;
-  object-fit: contain;
-  display: block;
-  filter: brightness(0) invert(1); /* white on dark */
-  opacity: 0.9;
-  transition:
-    opacity 0.18s ease,
-    transform 0.18s ease;
+.brand-tile img{
+  max-width:130px;
+  max-height:52px;
+  object-fit:contain;
+  display:block;
+  filter:brightness(0) invert(1);
+  opacity:0.9;
+  transition:opacity 0.18s ease, transform 0.18s ease;
 }
-
-.brand-tile:hover img {
-  opacity: 1;
-  transform: scale(1.05);
+.brand-tile:hover img{
+  opacity:1;
+  transform:scale(1.05);
 }
-
-/* Per-logo tweaks to compensate for SVG artboard differences */
 
 /* McDonald's arches look a bit small; bump them up slightly */
-.brand-tile--mcdonalds img {
-  transform: scale(1.25);
-}
-
-.brand-tile--mcdonalds:hover img {
-  transform: scale(1.35);
-}
+.brand-tile--mcdonalds img{transform:scale(1.25);}
+.brand-tile--mcdonalds:hover img{transform:scale(1.35);}
 
 /* Text-only brand tile (for Lidl) */
-.brand-tile__text {
-  font-family: 'Goldman', var(--font-sans, sans-serif);
-  font-weight: 700;
-  font-size: 1.8rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: #FFFFFF; /* Force white */
-  text-align: center;
-  display: block;
+.brand-tile__text{
+  font-family:'Goldman', var(--sans);
+  font-weight:700;
+  font-size:1.8rem;
+  letter-spacing:0.04em;
+  text-transform:uppercase;
+  color:#fff;
+  text-align:center;
+  display:block;
 }
 
-
-.brand-tile--lidl {
-  /* no extra rules needed, but keeps the hook if we want to tweak spacing later */
-}
-
-
-/* Slightly tighter layout on small screens */
-@media (max-width: 640px) {
-  .brand-tile {
-    padding: 1.75rem 1.25rem;
-    height: 100px;
+@media (max-width:640px){
+  .brand-tile{
+    padding:1.75rem 1.25rem;
+    height:100px;
   }
-
-  .brand-tile img {
-    max-width: 100px;
-    max-height: 40px;
+  .brand-tile img{
+    max-width:100px;
+    max-height:40px;
   }
 }
-
 
 /* ===== Buttons ===== */
 .btn{
-  background:var(--green);
+  background:var(--purple);
   color:#fff;
-  font-weight:700;
+  font-weight:600;
   padding:.65rem 1rem;
   border-radius:10px;
   display:inline-block;
   border:1px solid transparent;
-  transition:all .2s ease;
+  transition:transform .2s ease, box-shadow .2s ease, background .2s ease;
+  text-decoration:none;
 }
 .btn:hover{
   transform:translateY(-1px);

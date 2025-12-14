@@ -1,13 +1,62 @@
-// ===== Mobile nav toggle =====
-const toggle = document.querySelector('.nav__toggle');
-const navList = document.getElementById('nav-list');
+(() => {
+  const toggle = document.querySelector(".nav__toggle");
+  const list = document.getElementById("nav-list");
 
-if (toggle && navList) {
-  toggle.addEventListener('click', () => {
-    const isOpen = navList.classList.toggle('is-open');
-    toggle.setAttribute('aria-expanded', String(isOpen));
+  if (!toggle || !list) return;
+
+  const openClass = "is-open";
+
+  const setOpen = (open) => {
+    toggle.setAttribute("aria-expanded", String(open));
+    list.classList.toggle(openClass, open);
+
+    // Optional: prevent background scroll when menu is open
+    document.documentElement.classList.toggle("nav-open", open);
+  };
+
+  const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
+
+  const toggleOpen = () => setOpen(!isOpen());
+
+  // Primary handler (best for mobile)
+  toggle.addEventListener("pointerup", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleOpen();
   });
-}
+
+  // Fallback for browsers that don’t fully support pointer events
+  toggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toggleOpen();
+  });
+
+  // Close when a nav link is clicked
+  list.addEventListener("click", (e) => {
+    const a = e.target.closest("a");
+    if (!a) return;
+    setOpen(false);
+  });
+
+  // Close on outside click
+  document.addEventListener("click", (e) => {
+    if (!isOpen()) return;
+    const inNav = e.target.closest(".nav");
+    if (!inNav) setOpen(false);
+  });
+
+  // Close on Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isOpen()) setOpen(false);
+  });
+
+  // If you resize to desktop, force it “closed” (avoids stuck states)
+  window.addEventListener("resize", () => {
+    if (window.matchMedia("(min-width: 900px)").matches) setOpen(false);
+  });
+})();
+
 
 // ===== Carousel (Testimonials) =====
 document.querySelectorAll('[data-carousel]').forEach(carousel => {

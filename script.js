@@ -18,19 +18,12 @@
 
   const toggleOpen = () => setOpen(!isOpen());
 
-  // Primary handler (best for mobile)
   toggle.addEventListener("pointerup", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggleOpen();
-  });
+  e.preventDefault();
+  e.stopPropagation();
+  toggleOpen();
+});
 
-  // Fallback for browsers that don’t fully support pointer events
-  toggle.addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    toggleOpen();
-  });
 
   // Close when a nav link is clicked
   list.addEventListener("click", (e) => {

@@ -17,8 +17,13 @@
   const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
 
   const toggleOpen = () => setOpen(!isOpen());
-
+// Primary Handler for desktop and mobile
   toggle.addEventListener("pointerup", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
+  toggleOpen();
+});
+toggle.addEventListener("pointerup", (e) => {
   e.preventDefault();
   e.stopPropagation();
   toggleOpen();

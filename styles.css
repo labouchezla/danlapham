@@ -139,6 +139,42 @@ p,li{max-width:65ch;}
   border-bottom:1px solid var(--mid);
   background:#ffffffd5;
 }
+/* Ensure header/nav sits above page content */
+.site-header {
+  position: sticky; /* or fixed, if that’s what you’re using */
+  top: 0;
+  z-index: 1000;
+}
+
+/* Ensure the button is actually tappable */
+.nav__toggle {
+  position: relative;
+  z-index: 1001;
+  pointer-events: auto;
+}
+
+/* Mobile menu default: hidden + not clickable */
+@media (max-width: 899px) {
+  .nav__list {
+    max-height: 0;
+    overflow: hidden;
+    pointer-events: none;
+    visibility: hidden;
+    transition: max-height 220ms ease;
+  }
+
+  .nav__list.is-open {
+    max-height: 60vh; /* enough for your links */
+    pointer-events: auto;
+    visibility: visible;
+  }
+}
+
+/* Optional: stop background scroll when menu open */
+html.nav-open,
+html.nav-open body {
+  overflow: hidden;
+}
 .nav{
   max-width:var(--max);
   margin:0 auto;

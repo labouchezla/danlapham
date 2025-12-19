@@ -156,7 +156,7 @@ p,li{max-width:65ch;}
 /* Mobile menu default: hidden + not clickable */
 @media (max-width: 899px) {
   .nav__list {
-    display: flex;            /* ✅ ensure it's flex when revealed */
+    display: flex;
     flex-direction: column;
     max-height: 0;
     overflow: hidden;
@@ -171,6 +171,7 @@ p,li{max-width:65ch;}
     visibility: visible;
   }
 }
+
 
 
 /* Optional: stop background scroll when menu open */
@@ -216,8 +217,8 @@ html.nav-open body {
     border-radius: 8px;
   }
 
-  /* Keep the menu positioned like a dropdown, but DON'T use display:none */
   .nav__list {
+    /* keep layout/positioning only */
     flex-direction: column;
     background: #fff;
     border: 1px solid var(--mid);
@@ -227,6 +228,11 @@ html.nav-open body {
     top: 60px;
     width: min(18rem, calc(100vw - (var(--space) * 2)));
   }
+
+  .nav__list a {
+    padding: .6rem .75rem;
+  }
+}
 
   /* Optional: make tap targets nicer on small screens */
   .nav__list a {

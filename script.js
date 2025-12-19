@@ -15,20 +15,13 @@
   };
 
   const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
-
   const toggleOpen = () => setOpen(!isOpen());
-// Primary Handler for desktop and mobile
-  toggle.addEventListener("pointerup", (e) => {
-  e.preventDefault();
-  e.stopPropagation();
-  toggleOpen();
-});
-toggle.addEventListener("pointerup", (e) => {
-  e.preventDefault();
-  e.stopPropagation();
-  toggleOpen();
-});
 
+  // ✅ Primary handler (reliable on iOS Safari)
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation(); // don't let it immediately trigger outside click logic
+    toggleOpen();
+  });
 
   // Close when a nav link is clicked
   list.addEventListener("click", (e) => {
@@ -40,8 +33,11 @@ toggle.addEventListener("pointerup", (e) => {
   // Close on outside click
   document.addEventListener("click", (e) => {
     if (!isOpen()) return;
-    const inNav = e.target.closest(".nav");
-    if (!inNav) setOpen(false);
+
+    // If the click is inside the nav (button or list), ignore
+    if (e.target.closest(".nav")) return;
+
+    setOpen(false);
   });
 
   // Close on Escape
@@ -54,6 +50,7 @@ toggle.addEventListener("pointerup", (e) => {
     if (window.matchMedia("(min-width: 900px)").matches) setOpen(false);
   });
 })();
+
 
 
 // ===== Carousel (Testimonials) =====

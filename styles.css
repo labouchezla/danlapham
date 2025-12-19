@@ -234,6 +234,7 @@ html.nav-open body {
   }
 }
 
+.nav__list { z-index: 1002; }
 
 /* ===== Brand wall (Profound-style logo grid) ===== */
 .brand-wall{

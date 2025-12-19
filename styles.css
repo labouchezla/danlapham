@@ -156,6 +156,8 @@ p,li{max-width:65ch;}
 /* Mobile menu default: hidden + not clickable */
 @media (max-width: 899px) {
   .nav__list {
+    display: flex;            /* ✅ ensure it's flex when revealed */
+    flex-direction: column;
     max-height: 0;
     overflow: hidden;
     pointer-events: none;
@@ -164,11 +166,12 @@ p,li{max-width:65ch;}
   }
 
   .nav__list.is-open {
-    max-height: 60vh; /* enough for your links */
+    max-height: 60vh;
     pointer-events: auto;
     visibility: visible;
   }
 }
+
 
 /* Optional: stop background scroll when menu open */
 html.nav-open,
@@ -204,23 +207,33 @@ html.nav-open body {
 }
 .nav__toggle{display:none;}
 
-@media(max-width:760px){
-  .nav__toggle{
-    display:inline-flex;
-    background:#fff;
-    border:1px solid var(--mid);
-    padding:.5rem .75rem; border-radius:8px;
+@media (max-width: 760px) {
+  .nav__toggle {
+    display: inline-flex;
+    background: #fff;
+    border: 1px solid var(--mid);
+    padding: .5rem .75rem;
+    border-radius: 8px;
   }
-  .nav__list{
-    display:none;
-    flex-direction:column;
-    background:#fff;
-    border:1px solid var(--mid);
-    padding:.75rem;
-    position:absolute; right:var(--space); top:60px;
+
+  /* Keep the menu positioned like a dropdown, but DON'T use display:none */
+  .nav__list {
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--mid);
+    padding: .75rem;
+    position: absolute;
+    right: var(--space);
+    top: 60px;
+    width: min(18rem, calc(100vw - (var(--space) * 2)));
   }
-  .nav__list.is-open{display:flex;}
+
+  /* Optional: make tap targets nicer on small screens */
+  .nav__list a {
+    padding: .6rem .75rem;
+  }
 }
+
 
 /* ===== Brand wall (Profound-style logo grid) ===== */
 .brand-wall{

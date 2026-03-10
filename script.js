@@ -20,7 +20,6 @@
   const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
   const toggleOpen = () => setOpen(!isOpen());
 
-  // Safe initial state
   if (isDesktop()) {
     toggle.setAttribute("aria-expanded", "false");
     toggle.setAttribute("aria-label", "Open menu");
@@ -31,21 +30,18 @@
     setOpen(false);
   }
 
-  // Toggle menu
   toggle.addEventListener("click", (e) => {
     e.preventDefault();
     e.stopPropagation();
     toggleOpen();
   });
 
-  // Close when a nav link is clicked
   list.addEventListener("click", (e) => {
     const a = e.target.closest("a");
     if (!a) return;
     if (!isDesktop()) setOpen(false);
   });
 
-  // Close on outside click
   document.addEventListener("click", (e) => {
     if (isDesktop()) return;
     if (!isOpen()) return;
@@ -53,7 +49,6 @@
     setOpen(false);
   });
 
-  // Close on Escape
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && isOpen()) {
       setOpen(false);
@@ -61,7 +56,6 @@
     }
   });
 
-  // Reset state on resize
   window.addEventListener("resize", () => {
     if (isDesktop()) {
       toggle.setAttribute("aria-expanded", "false");

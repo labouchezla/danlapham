@@ -4,22 +4,37 @@
 
   if (!toggle || !list) return;
 
+  const DESKTOP_BREAKPOINT = 900;
   const openClass = "is-open";
+
+  const isDesktop = () => window.innerWidth > DESKTOP_BREAKPOINT;
 
   const setOpen = (open) => {
     toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    list.setAttribute("aria-hidden", String(!open));
     list.classList.toggle(openClass, open);
-
-    // Optional: prevent background scroll when menu is open
     document.documentElement.classList.toggle("nav-open", open);
   };
 
   const isOpen = () => toggle.getAttribute("aria-expanded") === "true";
   const toggleOpen = () => setOpen(!isOpen());
 
-  // ✅ Primary handler (reliable on iOS Safari)
+  // Safe initial state
+  if (isDesktop()) {
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open menu");
+    list.setAttribute("aria-hidden", "false");
+    list.classList.remove(openClass);
+    document.documentElement.classList.remove("nav-open");
+  } else {
+    setOpen(false);
+  }
+
+  // Toggle menu
   toggle.addEventListener("click", (e) => {
-    e.stopPropagation(); // don't let it immediately trigger outside click logic
+    e.preventDefault();
+    e.stopPropagation();
     toggleOpen();
   });
 
@@ -27,50 +42,59 @@
   list.addEventListener("click", (e) => {
     const a = e.target.closest("a");
     if (!a) return;
-    setOpen(false);
+    if (!isDesktop()) setOpen(false);
   });
 
   // Close on outside click
   document.addEventListener("click", (e) => {
+    if (isDesktop()) return;
     if (!isOpen()) return;
-
-    // If the click is inside the nav (button or list), ignore
     if (e.target.closest(".nav")) return;
-
     setOpen(false);
   });
 
   // Close on Escape
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && isOpen()) setOpen(false);
+    if (e.key === "Escape" && isOpen()) {
+      setOpen(false);
+      toggle.focus();
+    }
   });
 
-  // If you resize to desktop, force it “closed” (avoids stuck states)
+  // Reset state on resize
   window.addEventListener("resize", () => {
-    if (window.matchMedia("(min-width: 900px)").matches) setOpen(false);
+    if (isDesktop()) {
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open menu");
+      list.setAttribute("aria-hidden", "false");
+      list.classList.remove(openClass);
+      document.documentElement.classList.remove("nav-open");
+    } else if (!isOpen()) {
+      list.setAttribute("aria-hidden", "true");
+    }
   });
 })();
 
-
-
 // ===== Carousel (Testimonials) =====
-document.querySelectorAll('[data-carousel]').forEach(carousel => {
-  const track = carousel.querySelector('.carousel__track');
-  const prev = carousel.querySelector('.prev');
-  const next = carousel.querySelector('.next');
+document.querySelectorAll("[data-carousel]").forEach((carousel) => {
+  const track = carousel.querySelector(".carousel__track");
+  const prev = carousel.querySelector(".prev");
+  const next = carousel.querySelector(".next");
 
-  const scrollBy = direction => {
+  if (!track) return;
+
+  const scrollByAmount = (direction) => {
     track.scrollBy({
       left: direction * track.clientWidth * 0.9,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   };
 
-  prev?.addEventListener('click', () => scrollBy(-1));
-  next?.addEventListener('click', () => scrollBy(1));
+  prev?.addEventListener("click", () => scrollByAmount(-1));
+  next?.addEventListener("click", () => scrollByAmount(1));
 
-  carousel.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') scrollBy(-1);
-    if (e.key === 'ArrowRight') scrollBy(1);
+  carousel.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") scrollByAmount(-1);
+    if (e.key === "ArrowRight") scrollByAmount(1);
   });
 });

@@ -20,11 +20,16 @@
   <header class="site-header" role="banner">
     <nav class="nav" aria-label="Main">
       <a class="nav__brand" href="index.html">Danielle Lapham</a>
-      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-list">
-        Menu
-      </button>
+      <button
+  class="nav__toggle"
+  aria-expanded="false"
+  aria-controls="nav-list"
+  aria-label="Open menu"
+>
+  Menu
+</button>
 
-      <ul id="nav-list" class="nav__list">
+<ul id="nav-list" class="nav__list" aria-hidden="true">
         <li><a href="index.html">About</a></li>
         <li><a href="portfolio.html">Portfolio</a></li>
         <li><a href="resume.html">Résumé</a></li>
